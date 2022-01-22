@@ -1,6 +1,6 @@
 # Ansible Collection - c2platform.atlassian
 
-C2 Platform for Atlassian Jira, Confluence and Bitbucket
+C2 Platform collection for Atlassian Jira, Confluence and Bitbucket
 
 ## Roles
 
