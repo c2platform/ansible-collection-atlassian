@@ -1,0 +1,12 @@
+---
+- name: Prepare new install folder
+  file:
+    path: "{{ bitbucket_home_version_prepare }}"
+    state: directory
+    group: "{{ bitbucket_owner }}"
+    owner: "{{ bitbucket_group }}"
+    mode: 0755
+
+- name: Prepare home dir # noqa 301
+  command: "rsync -az --delete --recursive --exclude=shared/search/data {{ bitbucket_home_version_home }}/ {{ bitbucket_home_version_home_prepare }}/"
+  ignore_errors: true # home is being used

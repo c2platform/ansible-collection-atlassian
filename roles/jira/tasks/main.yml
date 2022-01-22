@@ -1,0 +1,41 @@
+---
+- name: Home
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+  with_items:
+    - "{{ jira_home }}"
+
+- include: download.yml
+  when: jira_lcm['operation'] in ['upgrade','install']
+
+- name: stop for upgrade, rollback or rollfoward
+  service: name=jira state=stopped
+  when: jira_lcm['operation'] in ['upgrade','rollback','rollforward']
+  notify:
+    - jira-systemctl-daemon-reload
+    - jira-systemctl-restart
+
+- include_tasks: database.yml
+  when: jira_database_inventory_hostname is defined and jira_database_type == 'postgresql'
+
+- include: install.yml
+- include: jmx.yml
+
+- name: Configure trusts
+  include_role:
+    name: c2platform.core.java
+    tasks_from: main
+  vars:
+    java_version: jira
+    java_versions:
+      jira:
+        install: no
+        java_home: "{{ jira_home_version_app }}/jre"
+        keystore: "{{ jira_home_version_app }}/jre/lib/security/cacerts"
+        trusts: "{{ jira_trusts }}"
+        notify: jira-systemctl-restart
+  when: jira_trusts is defined
+
+- include: service.yml

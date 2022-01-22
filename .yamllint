@@ -1,0 +1,18 @@
+---
+extends: default
+
+rules:
+  braces:
+    max-spaces-inside: 1
+    level: error
+  brackets:
+    max-spaces-inside: 1
+    level: error
+  line-length: disable
+  truthy: disable
+
+ignore: |
+  .tox/
+  ./roles/external/
+  ./roles/internal/services/awx/
+  ./roles/internal/test/

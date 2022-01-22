@@ -1,0 +1,5 @@
+---
+exclude_paths: []
+skip_list:
+  - meta-no-info
+warn_list: []

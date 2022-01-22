@@ -1,0 +1,10 @@
+---
+- block:
+  - name: Create database
+    include_role:
+      name: c2platform.core.postgresql_tasks
+      tasks_from: database
+    vars:
+      lcm_role_upgrade: jira
+  delegate_to: "{{ jira_database_inventory_hostname }}"
+  become_user: postgres

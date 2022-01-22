@@ -1,0 +1,14 @@
+vpass
+.vagrant
+*.log
+.galaxy_install_info
+.vscode
+.idea
+*.deb
+*.vdi
+*.tar
+*.tar.gz
+*.pyc
+**/local_stuff.yml
+roles/external/ansible-thoteam.nexus3-oss/target/*
+roles/external/ansible-thoteam.nexus3-oss/.*
