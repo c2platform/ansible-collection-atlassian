@@ -27,7 +27,7 @@ jira_database_type: postgresql
 jira_database_driver_class: org.postgresql.Driver
 jira_database_validation_query: select 1
 jira_database_schema: public
-jira_datababse_setbigstringtryclob: no # yes for oracle
+jira_datababse_setbigstringtryclob: no  # yes for oracle
 jira_database_lc_collate: C
 jira_database_lc_ctype: C
 # Oracle example settings
@@ -62,7 +62,7 @@ jira_versions:
     url: https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-software-8.13.0-x64.bin
     checksum: sha256:dc6d5ce0d9718adf1c3b0bbe5b0a744eeb46c072da2b775fdd5e7737f4b832b7
 
-jira_versions_sequence: ['7.12.1','7.13.14','8.4.2','8.5.5','8.13.0']
+jira_versions_sequence: ['7.12.1', '7.13.14', '8.4.2', '8.5.5', '8.13.0']
 
 # Atlassian Support recommended JVM arguments.
 jira_jvm_support_recommended_args: >-
@@ -71,15 +71,15 @@ jira_jvm_support_recommended_args: >-
   -XX:+UseCGroupMemoryLimitForHeap
   -XX:MaxRAMFraction=1
 
-#-Djavax.net.ssl.trustStore=/path#
-#-Djavax.net.ssl.trustStore
-#-Dhttp.proxyHost#
-#-Dhttp.proxyPort
-#-Dhttps.proxyHost
-#-Dhttps.proxyPort
+# -Djavax.net.ssl.trustStore=/path#
+# -Djavax.net.ssl.trustStore
+# -Dhttp.proxyHost#
+# -Dhttp.proxyPort
+# -Dhttps.proxyHost
+# -Dhttps.proxyPort
 
 # Session timeout.
-#jira_session_timeout: "300"
+# jira_session_timeout: "300"
 
 jira_jmx:
   enable: no
@@ -95,5 +95,5 @@ jira_libraries: []
 # https://confluence.atlassian.com/x/PRCEOQ
 jira_packages:
   RedHat: ['fontconfig']
-  CentOS: ['dejavu-sans-fonts','fontconfig']
+  CentOS: ['dejavu-sans-fonts', 'fontconfig']
   Ubuntu: ['fontconfig']

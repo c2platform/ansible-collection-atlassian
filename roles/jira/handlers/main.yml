@@ -1,12 +1,12 @@
 ---
-- name: jira-systemctl-daemon-reload
+- name: jira-systemctl-daemon-reload  # noqa ignore-errors
   systemd:
     daemon_reload: true
   changed_when: false
   ignore_errors: true
   when: not jira_manual_upgrade
 
-- name: jira-systemctl-restart
+- name: jira-systemctl-restart  # noqa ignore-errors
   service:
     name: "jira"
     state: "restarted"

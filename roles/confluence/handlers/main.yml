@@ -1,12 +1,12 @@
 ---
-- name: confluence-systemctl-daemon-reload
+- name: confluence-systemctl-daemon-reload  # noqa ignore-errors
   systemd:
     daemon_reload: true
   changed_when: false
   ignore_errors: true
   when: not confluence_manual_upgrade
 
-- name: confluence-systemctl-restart
+- name: confluence-systemctl-restart  # noqa ignore-errors
   service:
     name: "confluence"
     state: "restarted"

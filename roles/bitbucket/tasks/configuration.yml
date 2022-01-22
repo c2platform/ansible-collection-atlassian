@@ -14,7 +14,7 @@
     src: bitbucket.sh.j2
     mode: 0644
 
-- name: Extra libraries
+- name: Extra libraries  # noqa ignore-errors
   get_url:
     checksum: "{{ item.checksum }}"
     dest: "{{ bitbucket_home_version_home }}/shared/plugins/installed-plugins/{{ item.url|basename }}"

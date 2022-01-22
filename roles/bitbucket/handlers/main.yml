@@ -1,11 +1,11 @@
 ---
-- name: bitbucket-systemctl-daemon-reload
+- name: bitbucket-systemctl-daemon-reload  # noqa ignore-errors
   systemd:
     daemon_reload: true
   changed_when: false
   ignore_errors: true
 
-- name: bitbucket-systemctl-restart
+- name: bitbucket-systemctl-restart  # noqa ignore-errors
   service:
     name: "bitbucket"
     state: "restarted"

@@ -20,7 +20,7 @@
     src: response.varfile.j2
     mode: 0644
 
-- name: Copy home dir
+- name: Copy home dir  # noqa command-instead-of-module
   command: "rsync -az --delete --recursive --exclude='VERSION' {{ confluence_home_version_current }}/ {{ confluence_home_version }}/"
   when: confluence_lcm['operation'] == 'upgrade'
   notify:

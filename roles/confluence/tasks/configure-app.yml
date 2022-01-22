@@ -41,7 +41,7 @@
     replace: "{{ item.replace }}"
   with_items:
     - regexp: '^CATALINA_OPTS="-Xms.*$'
-      replace: "CATALINA_OPTS=\"-Xms{{ confluence_jvm_minimum_memory }} -Xmx{{ confluence_jvm_maximum_memory }} -XX:+UseG1GC {{ confluence_cataline_opts }} ${CATALINA_OPTS}\"" # noqa 204
+      replace: "CATALINA_OPTS=\"-Xms{{ confluence_jvm_minimum_memory }} -Xmx{{ confluence_jvm_maximum_memory }} -XX:+UseG1GC {{ confluence_cataline_opts }} ${CATALINA_OPTS}\""  # noqa 204
     - regexp: '-XX:ReservedCodeCacheSize=.*? '
       replace: '-XX:ReservedCodeCacheSize={{ confluence_jvm_reserved_code_cache_size }} '
   notify: confluence-systemctl-restart
