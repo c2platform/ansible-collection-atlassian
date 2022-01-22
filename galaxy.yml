@@ -1,26 +1,26 @@
 ---
 namespace: c2platform
-name: core
+name: atlassian
 version: "0.1.0"
 readme: README.md
 authors:
   - Onno van der Straaten (onno@onknows.com)
 license_file: LICENSE
 
-description: C2 Platform Ansible Collection with Core Roles, Modules, Filters
+description: C2 Platform Ansible Collection for Atlassian Jira, Confluence, Bitbucket
 
 tags:
   - c2platform
-  - common
-  - core
-  - collection
-  - linux
+  - atlassian
+  - jira
+  - confluence
+  - bitbucket
 
 dependencies: {}
 
-repository: https://github.com/c2platform/ansible-collection-core
-documentation: https://github.com/c2platform/ansible-collection-core
+repository: https://github.com/c2platform/ansible-collection-atlassian
+documentation: https://github.com/c2platform/ansible-collection-atlassian
 homepage: https://github.com/c2platform/
-issues: https://github.com/c2platform/ansible-collection-core/issues
+issues: https://github.com/c2platform/ansible-collection-atlassian/issues
 
 build_ignore: []
