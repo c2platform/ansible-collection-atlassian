@@ -22,8 +22,8 @@
     - bitbucket-systemctl-daemon-reload
     - bitbucket-systemctl-restart
 
-- include: database.yml
-  when: bitbucket_database_type == 'postgresql'
+- include_tasks: database.yml
+  when: bitbucket_database_inventory_hostname is defined and bitbucket_database_type == 'postgresql'
 
 - include: install.yml
 
