@@ -24,17 +24,18 @@
   command: "rsync -az --delete --recursive {{ bitbucket_home_version_home_current }}/ {{ bitbucket_home_version_home }}/"
   when: bitbucket_lcm['operation'] == 'upgrade'
 
-- name: run installer
+- name: Run installer
   command: "{{ bitbucket_home }}/{{ bitbucket_versions[bitbucket_version]['url']|basename }} -q -varfile {{ bitbucket_home }}/reponse.varfile"
   become: yes
   become_method: sudo
   become_user: "{{ bitbucket_versions[bitbucket_version]['installer_user']|default('root') }}"
-  # become_flags: '-s /bin/sh'
+  when: bitbucket_lcm['operation'] in ['upgrade','install']
+  vars:
+    ansible_ssh_pipelining: true
   notify:
     - lcm-version-file
     - bitbucket-systemctl-daemon-reload
     - bitbucket-systemctl-restart
-  when: bitbucket_lcm['operation'] in ['upgrade','install']
 
 # 7.0.1 installer runs as root, fix this
 - name: chown bitbucket home version
