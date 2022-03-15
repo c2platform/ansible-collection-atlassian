@@ -42,13 +42,6 @@ bitbucket_personal_repos: no
 # TODO
 # bitbucket_max_map_count: 262144
 
-# Proxy and context path setup.
-bitbucket_catalina_connector_proxyname: ~
-bitbucket_catalina_connector_proxyport: ~
-bitbucket_catalina_connector_scheme: "http"
-bitbucket_catalina_connector_secure: "false"
-bitbucket_catalina_context_path: "/"
-
 # Atlassian Support recommended JVM arguments.
 # bitbucket_jvm_support_recommended_args: >-
 #  -Datlassian.plugins.enable.wait=300
