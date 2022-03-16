@@ -1,5 +1,5 @@
 ---
-- name: run installer
+- name: Run installer
   command: "{{ confluence_home }}/{{ confluence_versions[confluence_version]['url']|basename }} -q -varfile {{ confluence_home }}/reponse.varfile"
   become: yes
   become_method: sudo

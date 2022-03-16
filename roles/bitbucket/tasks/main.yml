@@ -11,7 +11,7 @@
     state: directory
     group: "{{ bitbucket_owner }}"
     owner: "{{ bitbucket_group }}"
-    mode: 0755
+    mode: 0750
 
 - include: download.yml
 

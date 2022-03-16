@@ -3,7 +3,7 @@
   file:
     path: "{{ item }}"
     state: directory
-    mode: 0755
+    mode: 0750
   with_items:
     - "{{ confluence_home }}"
 
