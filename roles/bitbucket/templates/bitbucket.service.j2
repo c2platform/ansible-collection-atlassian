@@ -15,6 +15,7 @@ PIDFile={{ bitbucket_home_version_home }}/log/bitbucket.pid
 LimitNOFILE=65536
 Environment=BITBUCKET_USER={{ bitbucket_owner }}
 Environment=BITBUCKET_HOME={{ bitbucket_home_version_home }}
+UMask=0027
 {% if bitbucket_versions[bitbucket_version]['jdk'] is defined %}
 Environment=JAVA_HOME={{ bitbucket_versions[bitbucket_version]['jdk'] }}
 {% endif %}
