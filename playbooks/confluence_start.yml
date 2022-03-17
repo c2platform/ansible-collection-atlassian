@@ -1,0 +1,34 @@
+---
+- name: Start Confluence
+  hosts: "{{ confluence_hosts|default('confluence') }}"
+  become: yes
+
+  tasks:
+    - name: Clear logs  # noqa deprecated-command-syntax
+      shell:
+        cmd: |
+          rm /opt/confluence/confluence/home/logs/*
+          rm /opt/confluence/confluence/app/logs/*
+      when: confluence_start_clean_logs|default(False)
+
+    - name: Start Confluence
+      ansible.builtin.service:
+        name: confluence
+        state: started
+
+    - name: Wait Confluence port to open
+      wait_for:
+        port: "{{ confluence_web_port_https }}"
+        delay: 10
+
+    - name: Wait for URL
+      ansible.builtin.uri:
+        url: "https://localhost:{{ ok_confluence_web_port_https }}{{ confluence_web_context }}"
+        status_code: [200, 302]
+        return_content: yes
+        timeout: 300
+        validate_certs: no
+      retries: 10
+      delay: 10
+      register: wait_uri
+      until: "'login.action' in wait_uri.content or 'Set up Confluence' in wait_uri.content"

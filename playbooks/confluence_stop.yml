@@ -1,0 +1,21 @@
+---
+- name: Stop Confluence
+  hosts: "{{ confluence_hosts|default('confluence') }}"
+  become: yes
+
+  tasks:
+    - name: Get Confluence PID
+      shell:
+        cmd: ps -ef | grep -v "grep" | grep "java" | grep "confluence/app/bin/bootstrap.jar" | awk '{ print $2 }'
+      changed_when: false
+      register: confluence_pid
+
+    - name: Stop Confluence
+      ansible.builtin.service:
+        name: confluence
+        state: stopped
+
+    - name: Wait for Confluence to finish
+      wait_for:
+        path: "/proc/{{ confluence_pid['stdout'] }}/status"
+        state: absent
