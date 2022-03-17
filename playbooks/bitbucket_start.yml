@@ -1,0 +1,32 @@
+---
+- name: Start Bitbucket
+  hosts: "{{ bitbucket_hosts|default('bitbucket') }}"
+  become: yes
+
+  tasks:
+    - name: Clear logs  # noqa deprecated-command-syntax
+      shell:
+        cmd: |
+          rm /opt/bitbucket/bitbucket/home/log/*.log
+      when: bitbucket_start_clean_logs|default(False)
+
+    - name: Start Bitbucket
+      ansible.builtin.service:
+        name: bitbucket
+        state: started
+
+    - name: Wait Bitbucket port to open
+      wait_for:
+        port: "{{ bitbucket_web_port }}"
+        delay: 10
+
+    - name: Wait for URL
+      ansible.builtin.uri:
+        url: "http://localhost:{{ bitbucket_web_port }}/{{ bitbucket_web_context }}"
+        status_code: [200, 503, 302]
+        return_content: yes
+        timeout: 300
+      retries: 10
+      delay: 10
+      register: wait_uri
+      until: "'Your work - Bitbucket' in wait_uri.content or 'Setup - Bitbucket' in wait_uri.content"

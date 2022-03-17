@@ -1,0 +1,21 @@
+---
+- name: Stop Bitbucket
+  hosts: "{{ bitbucket_hosts|default('bitbucket') }}"
+  become: yes
+
+  tasks:
+    - name: Get Bitbucket PID
+      shell:
+        cmd: ps -ef | grep -v "grep" | grep "java" | grep "native com.atlassian.bitbucket.internal.launcher.BitbucketServerLauncher start" | awk '{ print $2 }'
+      changed_when: false
+      register: bitbucket_pid
+
+    - name: Stop Bitbucket
+      ansible.builtin.service:
+        name: bitbucket
+        state: stopped
+
+    - name: Wait for Bitbucket to finish
+      wait_for:
+        path: "/proc/{{ bitbucket_pid['stdout'] }}/status"
+        state: absent
