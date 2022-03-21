@@ -31,4 +31,4 @@
       retries: 10
       delay: 10
       register: wait_uri
-      until: "'login.action' in wait_uri.content or 'Set up Confluence' in wait_uri.content"
+      until: "'login.action' in wait_uri.content or 'Set up Confluence' in wait_uri.content or 'Sign in to your account' in wait_uri.content"

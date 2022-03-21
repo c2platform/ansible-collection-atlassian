@@ -29,4 +29,4 @@
       retries: 10
       delay: 10
       register: wait_uri
-      until: "'Your work - Bitbucket' in wait_uri.content or 'Setup - Bitbucket' in wait_uri.content"
+      until: "'Public Repositories - Bitbucket' in wait_uri.content or 'Setup - Bitbucket' in wait_uri.content"
