@@ -11,6 +11,7 @@ Default Confluence will be configured to be used via a reverse proxy server. Def
   - [Service environment](#service-environment)
   - [Manual upgrade](#manual-upgrade)
   - [Manage keystore / trusts](#manage-keystore--trusts)
+  - [confluence_max_http_header_size](#confluence_max_http_header_size)
   - [Backup / restore](#backup--restore)
 - [Dependencies](#dependencies)
 - [Example Playbook](#example-playbook)
@@ -47,6 +48,35 @@ confluence_trusts:
 ```
 
 This is based on the `trusts` attribute of [c2platform.core.java](https://github.com/c2platform/ansible-collection-core/tree/master/roles/java#manage-keystore--trusts) Ansible role.
+
+### confluence_max_http_header_size
+
+When using SSO solution like Keycloak it is better / necessary to configure `maxHttpHeaderSize` in `server.xml` to higher value of `16834`. Otherwise you might get error messages like the one shown below. Of course, when running Confluence behind a reverse proxy, for example Apache2, you will also to configure `LimitRequestFieldSize` to equal higher value.
+
+> HTTP Status 400 – Bad Request
+> 
+> Type Exception Report
+> 
+> Message Request header is too large
+> 
+> Description The server cannot or will not process the request due to something that is perceived to be a client error (> e.g., malformed request syntax, invalid request message framing, or deceptive request routing).
+> 
+> Exception
+> 
+> java.lang.IllegalArgumentException: Request header is too large
+> org.apache.coyote.http11.Http11InputBuffer.parseHeaders(Http11InputBuffer.java:594)
+> org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:283)
+> org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+> org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+> org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+> org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+> java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+> java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+> org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+> java.base/java.lang.Thread.run(Unknown Source)
+> 
+> Note The full stack trace of the root cause is available in the server logs.
+> Apache Tomcat/9.0.33
 
 ### Backup / restore
 
