@@ -55,7 +55,7 @@ Note: the application directory `/opt/jira/jira/app` is not configured when perf
 
 ### jira_max_http_header_size
 
-When using SSO solution like Keycloak it is better / necessary to configure `maxHttpHeaderSize` in `server.xml` to higher value of `16834`. Otherwise you might get error messages like the one shown below. Of course, when running Confluence behind a reverse proxy, for example Apache2, you will also to configure `LimitRequestFieldSize` to equal higher value.
+When using SSO solution like Keycloak it is better / necessary to configure `maxHttpHeaderSize` in `server.xml` to higher value of `16834`. Otherwise you might get error messages like the one shown below. Of course, when running Confluence behind a reverse proxy, for example Apache2, you will also need to configure `LimitRequestFieldSize` to equal higher value.
 
 > HTTP Status 400 – Bad Request
 > 
