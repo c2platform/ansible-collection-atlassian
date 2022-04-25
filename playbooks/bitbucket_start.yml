@@ -22,7 +22,7 @@
 
     - name: Wait for URL
       ansible.builtin.uri:
-        url: "http://localhost:{{ bitbucket_web_port }}/{{ bitbucket_web_context }}"
+        url: "http://localhost:{{ bitbucket_web_port }}{{ bitbucket_web_context }}"
         status_code: [200, 503, 302]
         return_content: yes
         timeout: 300

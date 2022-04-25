@@ -10,15 +10,16 @@
     <Service name="Catalina">
         <Connector port="{{ jira_web_port }}" relaxedPathChars="[]|" relaxedQueryChars="[]|{}^&#x5c;&#x60;&quot;&lt;&gt;"
                    maxThreads="150" minSpareThreads="25" connectionTimeout="20000" enableLookups="false"
-                   maxHttpHeaderSize="8192" protocol="HTTP/1.1" useBodyEncodingForURI="true" 
+                   maxHttpHeaderSize="{{ jira_max_http_header_size }}" protocol="HTTP/1.1" useBodyEncodingForURI="true"
                    secure="true"
                    scheme="https"
                    proxyName="{{ jira_proxy_name }}"
                    proxyPort="{{ jira_proxy_port }}"
                    redirectPort="{{ jira_proxy_port }}"
-                   acceptCount="100" 
-                   disableUploadTimeout="true" 
-                   bindOnInit="false"/>
+                   acceptCount="100"
+                   disableUploadTimeout="true"
+                   bindOnInit="false"
+                   />
         <Engine name="Catalina" defaultHost="localhost">
             <Host name="localhost" appBase="webapps" unpackWARs="true" autoDeploy="true">
 
