@@ -1,22 +1,65 @@
-# Ansible Role: Bitbucket
+# Ansible Role bitbucket
 
-An Ansible Role that installs [Bitbucket](https://www.atlassian.com/software/bitbucket/) on RedHat/CentOS.
+A brief description of the role goes here.
+
+<!-- MarkdownTOC levels="2,3" autolink="true" -->
+
+- [Requirements](#requirements)
+- [Role Variables](#role-variables)
+  - [bitbucket_max_http_header_size](#bitbucket_max_http_header_size)
+- [Dependencies](#dependencies)
+- [Example Playbook](#example-playbook)
+
+<!-- /MarkdownTOC -->
 
 ## Requirements
 
+<!-- Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required. -->
+
 ## Role Variables
+
+<!--  A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well. -->
+
+### bitbucket_max_http_header_size
+
+When using SSO solution like Keycloak it is better / necessary to configure `server.max-http-header-size` in `bitbucket.properties` to higher value of `16834`. Otherwise you might get error messages like the one shown below. Of course, when running Confluence behind a reverse proxy, for example Apache2, you will also need to configure `LimitRequestFieldSize` to equal higher value.
+
+> HTTP Status 400 – Bad Request
+> 
+> Type Exception Report
+> 
+> Message Request header is too large
+> 
+> Description The server cannot or will not process the request due to something that is perceived to be a client error (> e.g., malformed request syntax, invalid request message framing, or deceptive request routing).
+> 
+> Exception
+> 
+> java.lang.IllegalArgumentException: Request header is too large
+> org.apache.coyote.http11.Http11InputBuffer.parseHeaders(Http11InputBuffer.java:594)
+> org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:283)
+> org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+> org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+> org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1594)
+> org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+> java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+> java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+> org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+> java.base/java.lang.Thread.run(Unknown Source)
+> 
+> Note The full stack trace of the root cause is available in the server logs.
+> Apache Tomcat/9.0.33
+
 
 ## Dependencies
 
-## Referencies
-### Bitbucket 7.6 is a LTS release
+<!--   A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles. -->
 
-[Bitbucket 7.6 release notes] (https://confluence.atlassian.com/bitbucketserver/bitbucket-server-7-6-release-notes-1018780800.html)
-[Bitbucket 7.6 LTS change log] (https://confluence.atlassian.com/bitbucketserver/bitbucket-server-7-6-long-term-support-release-change-log-1018780826.html)
-[Bitbucket Java Melody Installation] https://github.com/javamelody/javamelody/wikiAtlassianPlugin#Bitbucket
+## Example Playbook
 
-__lcm__ 
+<!--   Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too: -->
 
-
-
-
+```yaml
+    - hosts: servers
+      roles:
+         - { role: username.rolename, x: 42 }
+```

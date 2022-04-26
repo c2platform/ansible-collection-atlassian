@@ -40,3 +40,6 @@ server.proxy-name={{ bitbucket_reverse_proxy.hostname }}
 # https://confluence.atlassian.com/bitbucketserver/securing-bitbucket-server-with-tomcat-using-ssl-776640127.html
 {% endif %}
 # plugin.mirroring.upstream.url=https://bitbucket.company.com
+{% if bitbucket_max_http_header_size is defined %}
+server.max-http-header-size={{ bitbucket_max_http_header_size }}
+{% endif %}
