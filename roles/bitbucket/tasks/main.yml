@@ -32,6 +32,21 @@
 - include: jmx.yml
   when: bitbucket_jmx.enable
 
+- name: Configure trusts
+  include_role:
+    name: c2platform.core.java
+    tasks_from: main
+  vars:
+    java_version: bitbucket
+    java_versions:
+      bitbucket:
+        install: no
+        java_home: "{{ bitbucket_home_version_app }}/jre"
+        keystore: "{{ bitbucket_home_version_app }}/jre/lib/security/cacerts"
+        trusts: "{{ bitbucket_trusts }}"
+        notify: bitbucket-systemctl-restart
+  when: bitbucket_trusts is defined
+
 - include: service.yml
 
 - include: prepare.yml
