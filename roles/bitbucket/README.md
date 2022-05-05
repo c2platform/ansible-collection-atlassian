@@ -6,6 +6,7 @@ A brief description of the role goes here.
 
 - [Requirements](#requirements)
 - [Role Variables](#role-variables)
+  - [Manage keystore / trusts](#manage-keystore--trusts)
   - [bitbucket_max_http_header_size](#bitbucket_max_http_header_size)
 - [Dependencies](#dependencies)
 - [Example Playbook](#example-playbook)
@@ -19,6 +20,18 @@ A brief description of the role goes here.
 ## Role Variables
 
 <!--  A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well. -->
+
+### Manage keystore / trusts
+
+The list `bitbucket_trusts` can be used to import one or more CA bundles / certificates to facilitate secure communication. 
+
+```yaml
+bitbucket_trusts:
+  - alias: gxd
+    url: file:///vagrant/.ca/gxd/gxd.crt
+```
+
+This is based on the `trusts` attribute of [c2platform.core.java](https://github.com/c2platform/ansible-collection-core/tree/master/roles/java#manage-keystore--trusts) Ansible role.
 
 ### bitbucket_max_http_header_size
 
