@@ -24,6 +24,13 @@
 - include: cert.yml
 - include: jmx.yml
 
+- name: Files
+  include_role:
+    name: c2platform.core.files
+    tasks_from: main
+  vars:
+    common_files_role_name: confluence
+
 - name: Configure trusts
   include_role:
     name: c2platform.core.java
