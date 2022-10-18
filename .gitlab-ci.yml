@@ -1,0 +1,79 @@
+---
+before_script:
+  - apt-get update -qy
+  - apt-get install -y python3-dev python3-pip jq
+  - pip3 install  yq yamllint ansible==4.10.0 "ansible-lint[yamllint]"
+  - python3 --version
+  - pip3 --version
+  - ansible --version
+  - ansible-lint --version
+  - yamllint --version
+
+# run the pipeline only on MRs and default branch
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+stages:
+  - linters
+  - prepare
+  - galaxy
+  - release
+
+yamllint:
+  stage: linters
+  script:
+    - yamllint -c .yamllint .
+
+ansible-lint:
+  stage: linters
+  script:
+    - ansible-lint -c .ansible-lint
+
+prepare:
+  stage: prepare
+  script:
+    - C2_VERSION=$(yq '.version' galaxy.yml | sed 's/"//g')
+    - C2_NAME=$(yq '.name' galaxy.yml | sed 's/"//g')
+    - C2_NAMESPACE=$(yq '.namespace' galaxy.yml | sed 's/"//g')
+    - echo "C2_VERSION=$C2_VERSION" >> variables.env  # and append to the variables.env file
+    - echo "C2_NAME=$C2_NAME" >> variables.env
+    - echo "C2_NAMESPACE=$C2_NAMESPACE" >> variables.env
+  artifacts:
+    reports:
+      dotenv: variables.env
+
+publish:
+  stage: galaxy
+  needs:
+    - prepare
+  script:
+    - cat README-GALAXY.md > README.md  # readme property in galaxy.yml is ignored by galaxy website
+    - ansible-galaxy collection build . --force
+    - ansible-galaxy collection publish $C2_NAMESPACE-$C2_NAME-$C2_VERSION.tar.gz --api-key $GALAXY_API_KEY
+  artifacts:
+    paths:
+      - $C2_NAMESPACE-$C2_NAME-$C2_VERSION.tar.gz
+  when: manual
+
+gitlab-release:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  needs:
+    - job: publish
+      optional: true
+    - job: prepare
+      optional: true
+  before_script: []
+  script:
+    - echo "Create release for $C2_NAMESPACE.$C2_NAME $C2_VERSION"
+  release:
+    name: $C2_NAMESPACE.$C2_NAME $C2_VERSION
+    description: './CHANGELOG.md'
+    tag_name: $C2_VERSION
+    ref: $CI_COMMIT_SHA
+    assets:
+      links:
+        - name: $C2_NAMESPACE.$C2_NAME
+          url: https://galaxy.ansible.com/$C2_NAMESPACE/$C2_NAME

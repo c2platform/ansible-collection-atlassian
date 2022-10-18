@@ -41,7 +41,7 @@ jira_trusts:
     url: file:///vagrant/.ca/gxd/gxd.crt
 ```
 
-This is based on the `trusts` attribute of [c2platform.core.java](https://github.com/c2platform/ansible-collection-core/tree/master/roles/java#manage-keystore--trusts) Ansible role.
+This is based on the `trusts` attribute of [c2platform.core.java](https://gitlab.com/c2platform/ansible-collection-core/tree/master/roles/java#manage-keystore--trusts) Ansible role.
 
 ### Manual upgrade
 
@@ -84,13 +84,13 @@ When using SSO solution like Keycloak it is better / necessary to configure `max
 
 ### Backup / restore
 
-Backup and restore is fully automated using **backup** role in the [c2platform.mgmt](https://github.com/c2platform/ansible-collection-mgmt) collection.
+Backup and restore is fully automated using **backup** role in the [c2platform.mgmt](https://gitlab.com/c2platform/ansible-collection-mgmt) collection.
 
 ## Dependencies
 
 <!--   A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles. -->
 
-This role is dependent on the [c2platform.core](https://github.com/c2platform/ansible-collection-core) collection. For example it uses the roles.
+This role is dependent on the [c2platform.core](https://gitlab.com/c2platform/ansible-collection-core) collection. For example it uses the roles.
 
 * [lcm](../lcm)
 * [postgresql_tasks](../postgresql_tasks)

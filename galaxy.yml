@@ -18,9 +18,9 @@ tags:
 
 dependencies: {}
 
-repository: https://github.com/c2platform/ansible-collection-atlassian
-documentation: https://github.com/c2platform/ansible-collection-atlassian
-homepage: https://github.com/c2platform/
-issues: https://github.com/c2platform/ansible-collection-atlassian/issues
+repository: https://gitlab.com/c2platform/ansible-collection-atlassian
+documentation: https://gitlab.com/c2platform/ansible-collection-atlassian
+homepage: https://gitlab.com/c2platform/
+issues: https://gitlab.com/c2platform/ansible-collection-atlassian/issues
 
 build_ignore: []

@@ -31,7 +31,7 @@ bitbucket_trusts:
     url: file:///vagrant/.ca/gxd/gxd.crt
 ```
 
-This is based on the `trusts` attribute of [c2platform.core.java](https://github.com/c2platform/ansible-collection-core/tree/master/roles/java#manage-keystore--trusts) Ansible role.
+This is based on the `trusts` attribute of [c2platform.core.java](https://gitlab.com/c2platform/ansible-collection-core/tree/master/roles/java#manage-keystore--trusts) Ansible role.
 
 ### bitbucket_max_http_header_size
 
